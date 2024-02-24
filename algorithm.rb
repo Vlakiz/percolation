@@ -110,14 +110,3 @@ class PercolationTable
 		(@table_size - @size...@table_size)
 	end
 end
-
-table = PercolationTable.new(4)
-until table.percolated?
-	table.render
-	table.open_cell
-	sleep 1
-	table.up_carriage
-end
-table.render
-sleep 1
-puts 'PERCOLATED!'

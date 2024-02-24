@@ -5,11 +5,10 @@ class UnionFind
 	end
 
 	def root(x)
-		original_x = x
 		until @arr[x] == x
+			@arr[x] = @arr[@arr[x]]
 			x = @arr[x]
 		end
-		@arr[original_x] = x
 		x
 	end
 
@@ -21,12 +20,14 @@ class UnionFind
 		rootX = root(x)
 		rootY = root(y)
 
-		if @size[rootX] > @size[rootY]
-			@arr[rootY] = rootX
-			@size[rootX] += @size[rootY]
-		else
+		if rootX == rootY
+			return
+		elsif @size[rootX] < @size[rootY]
 			@arr[rootX] = rootY
 			@size[rootY] += @size[rootX]
+		else
+			@arr[rootY] = rootX
+			@size[rootX] += @size[rootY]
 		end
 	end
 end
